@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Brand Colors -->
+    <color name="primary">#2196F3</color>          <!-- Blue -->
+    <color name="primary_dark">#1976D2</color>     <!-- Darker Blue -->
+    <color name="primary_light">#BBDEFB</color>    <!-- Light Blue -->
+    <color name="accent">#FF4081</color>           <!-- Pink Accent -->
+
+    <!-- Background Colors -->
+    <color name="background_light">#FFFFFF</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface_light">#F5F5F5</color>
+    <color name="surface_dark">#1E1E1E</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary_light">#212121</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_light">#757575</color>
+    <color name="text_secondary_dark">#B0B0B0</color>
+
+    <!-- Status Colors -->
+    <color name="online_green">#4CAF50</color>
+    <color name="offline_red">#F44336</color>
+    <color name="warning_orange">#FF9800</color>
+
+    <!-- Cry Type Colors -->
+    <color name="hungry_green">#4CAF50</color>
+    <color name="pain_red">#F44336</color>
+    <color name="normal_blue">#2196F3</color>
+
+    <!-- Chart Colors -->
+    <color name="chart_hungry">#4CAF50</color>
+    <color name="chart_pain">#F44336</color>
+    <color name="chart_normal">#2196F3</color>
+
+    <!-- Temperature/Humidity Colors -->
+    <color name="temp_cold">#2196F3</color>
+    <color name="temp_optimal">#4CAF50</color>
+    <color name="temp_hot">#F44336</color>
+
+    <!-- Common Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Card/Surface Elevation -->
+    <color name="card_background_light">#FFFFFF</color>
+    <color name="card_background_dark">#2C2C2C</color>
+
+    <!-- Divider Colors -->
+    <color name="divider_light">#E0E0E0</color>
+    <color name="divider_dark">#424242</color>
+</resources>
