@@ -160,9 +160,6 @@ data class PiInfo(
  * UDP notification message from Pi broadcast
  */
 data class UDPNotification(
-    @SerializedName("type")
-    val type: String,  // "cry_detected"
-
     @SerializedName("cry_type")
     val cryType: String,
 

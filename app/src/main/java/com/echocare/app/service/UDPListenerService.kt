@@ -204,23 +204,27 @@ class UDPListenerService : Service() {
             // Parse JSON to UDPNotification object
             val notification = gson.fromJson(message, UDPNotification::class.java)
 
-            Log.d(TAG, "Parsed notification: type=${notification.type}, " +
-                    "cry_type=${notification.cryType}, " +
+            Log.d(TAG, "Parsed UDP: cry_type=${notification.cryType}, " +
                     "confidence=${notification.getDisplayConfidence()}%")
 
-            // Verify it's a cry detection notification
-            if (notification.type == "cry_detected") {
+            // Verify it's a valid cry notification (has cry_type)
+            if (!notification.cryType.isNullOrBlank()) {
                 // Show notification to user
                 notificationHelper.showCryNotification(notification)
 
-                // Broadcast data update
+                // Broadcast data update to MainActivity
                 sendBroadcast(Intent(IntentActions.CRY_DETECTED).apply {
-                    putExtra("cry_type", notification.cryType)
+                    putExtra("cry_type", notification.getCryTypeDisplay())
                     putExtra("confidence", notification.getDisplayConfidence())
+                    putExtra("temperature", notification.temperature ?: 0.0)
+                    putExtra("humidity", notification.humidity ?: 0.0)
                     putExtra("timestamp", notification.timestamp)
                 })
 
-                Log.d(TAG, "Cry notification displayed successfully")
+                Log.d(TAG, "✅ Cry notification sent: ${notification.getCryTypeDisplay()} " +
+                        "(${notification.getDisplayConfidence()}%)")
+            } else {
+                Log.w(TAG, "Ignored notification with empty cry_type")
             }
 
         } catch (e: Exception) {
