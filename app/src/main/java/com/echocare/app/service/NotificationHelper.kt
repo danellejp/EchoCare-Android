@@ -67,8 +67,7 @@ class NotificationHelper(private val context: Context) {
         } else {
             // Low confidence - just say crying detected
             context.getString(
-                R.string.notif_cry_message_low_confidence,
-                notification.getDisplayConfidence()
+                R.string.notif_cry_message_low_confidence
             )
         }
 

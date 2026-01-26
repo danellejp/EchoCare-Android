@@ -84,7 +84,7 @@
     <string name="notif_service_text">Listening for baby cries</string>
     <string name="notif_cry_title">Baby is Crying</string>
     <string name="notif_cry_message">%d%% confidence the cause is %s</string>
-    <string name="notif_cry_message_low_confidence">Crying detected - Confidence %d%%</string>
+    <string name="notif_cry_message_low_confidence">Crying detected</string>
 
     <!-- Service Messages -->
     <string name="service_started">Monitoring service started</string>
