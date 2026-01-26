@@ -80,23 +80,24 @@ class NotificationHelper(private val context: Context) {
             .setContentTitle(title)
             .setContentText(message)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true) // Dismiss when tapped
-            .setDefaults(NotificationCompat.DEFAULT_SOUND)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 
         // Add additional info as expanded content
         notification.temperature?.let { temp ->
             notification.humidity?.let { humidity ->
-                val expandedText = "$message\n\nTemperature: ${String.format("%.1f°C", temp)}\nHumidity: ${String.format("%.1f%%", humidity)}"
+                val expandedText = "$message\n\n🌡️ ${String.format("%.1f°C", temp)}  💧 ${String.format("%.1f%%", humidity)}"
                 notificationBuilder.setStyle(NotificationCompat.BigTextStyle().bigText(expandedText))
             }
         }
 
-        // Show notification
+        // Show notification with unique ID each time
         notificationManager.notify(
-            AppConstants.CRY_NOTIFICATION_ID,
+            System.currentTimeMillis().toInt(),
             notificationBuilder.build()
         )
 
@@ -104,6 +105,8 @@ class NotificationHelper(private val context: Context) {
         if (vibrationEnabled) {
             triggerVibration()
         }
+
+        android.util.Log.d("NotificationHelper", "Notification sent: $title")
     }
 
     /**
