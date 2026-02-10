@@ -55,14 +55,16 @@ object AppConstants {
     const val PREF_SERVICE_RUNNING = "service_running"
 
     // Dashboard Configuration
-    const val DEFAULT_TIME_RANGE_HOURS = 24
-    const val WEEK_TIME_RANGE_HOURS = 168  // 7 days
+    const val DEFAULT_TIME_RANGE_HOURS = 24 // Past 24 hours filter
+    const val WEEK_TIME_RANGE_HOURS = 168  // 7 days filter
     const val DASHBOARD_REFRESH_INTERVAL_MS = 30000L  // 30 seconds
+    const val MAX_EVENTS = 50 // max events to request from API
 
     // Cry Type Constants
-    const val CRY_TYPE_HUNGRY = "hungry"
-    const val CRY_TYPE_PAIN = "pain"
-    const val CRY_TYPE_NORMAL = "normal"
+    const val CRY_TYPE_HUNGRY = "Hungry"
+    const val CRY_TYPE_PAIN = "Pain"
+    const val CRY_TYPE_NORMAL = "Normal"
+    const val ALL = "All"
 
     // Confidence Thresholds
     const val MIN_DETECTION_CONFIDENCE = 85  // 85%
@@ -97,7 +99,7 @@ object EnvironmentConstants {
 }
 
 /**
- * Intent action constants for broadcasts
+ * Intent action constants for broadcast communication within the app
  */
 object IntentActions {
     const val CRY_DETECTED = "com.echocare.app.CRY_DETECTED"

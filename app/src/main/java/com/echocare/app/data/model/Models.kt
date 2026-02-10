@@ -1,10 +1,24 @@
 package com.echocare.app.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 /**
  * Represents a single cry event from the database
  * Matches the structure returned by Pi's FastAPI backend
+ * Maps to JSON from GET /recent-events:
+ *  {
+ *     "id": 15,
+ *     "timestamp": "2026-01-22T10:30:45",
+ *     "cry_type": "Hungry",
+ *     "detection_confidence": 0.9234,
+ *     "classification_confidence": 0.8567,
+ *     "temperature": 22.3,
+ *     "humidity": 48.5
+ *  }
  */
 data class CryEvent(
     @SerializedName("id")
@@ -89,6 +103,86 @@ data class CryEvent(
             else -> cryType
         }
     }
+
+    /**
+     * Returns the classification confidence as a percentage integer (e.g. 85).
+     * Null-safe: falls back to detection confidence if classification is null.
+     * Used by CryEventAdapter for the confidence badge on each card.
+     */
+    fun classificationPercent(): Int {
+        val conf = classificationConfidence ?: detectionConfidence
+        return (conf * 100).toInt()
+    }
+
+    /**
+     * Returns the detection confidence as a percentage integer.
+     */
+    fun detectionPercent(): Int = (detectionConfidence * 100).toInt()
+
+    /**
+     * Formats the timestamp into a full date/time string.
+     * Example: "22 Jan 2026, 10:30"
+     * Uses SimpleDateFormat for reliable parsing (handles microseconds etc).
+     * Used by CryEventAdapter for the secondary date line on each card.
+     */
+    fun formattedDateTime(): String {
+        return try {
+            val cleanTimestamp = timestamp.split(".")[0]  // Remove microseconds if present
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+            val date = inputFormat.parse(cleanTimestamp)
+            date?.let { outputFormat.format(it) } ?: timestamp
+        } catch (e: Exception) {
+            timestamp
+        }
+    }
+
+    /**
+     * Returns a relative time string like "2h ago", "Just now", etc.
+     * Falls back to formattedDateTime() for events older than 7 days.
+     * Used by CryEventAdapter for the primary time display on each card.
+     */
+    fun timeAgo(): String {
+        return try {
+            val cleanTimestamp = timestamp.split(".")[0]  // Remove microseconds if present
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            val date = inputFormat.parse(cleanTimestamp) ?: return timestamp
+            val now = Date()
+            val diffMs = now.time - date.time
+
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(diffMs)
+            val hours = TimeUnit.MILLISECONDS.toHours(diffMs)
+            val days = TimeUnit.MILLISECONDS.toDays(diffMs)
+
+            when {
+                minutes < 1 -> "Just now"
+                minutes < 60 -> "${minutes}m ago"
+                hours < 24 -> "${hours}h ago"
+                days < 7 -> "${days}d ago"
+                else -> formattedDateTime()
+            }
+        } catch (e: Exception) {
+            timestamp
+        }
+    }
+
+    /**
+     * Returns the temperature formatted with unit, or "N/A" if null.
+     * Example: "22.3°C"
+     * Used by CryEventAdapter for the temperature display on each card.
+     */
+    fun formattedTemperature(): String {
+        return temperature?.let { String.format("%.1f°C", it) } ?: "N/A"
+    }
+
+    /**
+     * Returns the humidity formatted with unit, or "N/A" if null.
+     * Example: "48.5%"
+     * Used by CryEventAdapter for the humidity display on each card.
+     */
+    fun formattedHumidity(): String {
+        return humidity?.let { String.format("%.1f%%", it) } ?: "N/A"
+    }
 }
 
 /**
@@ -101,31 +195,37 @@ data class RecentEventsResponse(
     @SerializedName("count")
     val count: Int,
 
-    @SerializedName("time_range")
-    val timeRange: String
+    @SerializedName("limit")
+    val timeRange: Int
 )
 
 /**
  * Response from /statistics endpoint
  */
 data class StatisticsResponse(
-    @SerializedName("total_events")
-    val totalEvents: Int,
+    @SerializedName("time_window_hours")
+    val timeWindowHours: Int,
 
-    @SerializedName("time_period")
-    val timePeriod: String,
+    @SerializedName("statistics")
+    val statistics: Statistics,
 
-    @SerializedName("cry_type_distribution")
-    val cryTypeDistribution: Map<String, Int>,
+    @SerializedName("generated_at")
+    val generatedAt: String
+)
 
-    @SerializedName("average_temperature")
-    val averageTemperature: Double?,
+/**
+ * Nested statistics object inside StatisticsResponse.
+ * Matches the Pi's actual "statistics" JSON object.
+ */
+data class Statistics(
+    @SerializedName("total_cries")
+    val totalCries: Int,
 
-    @SerializedName("average_humidity")
-    val averageHumidity: Double?,
+    @SerializedName("by_type")
+    val byType: Map<String, Int>,      // e.g. {"Hungry": 8, "Pain": 5, "Normal": 2}
 
-    @SerializedName("hourly_distribution")
-    val hourlyDistribution: Map<String, Int>
+    @SerializedName("average_confidence")
+    val averageConfidence: Double
 )
 
 /**
@@ -145,7 +245,7 @@ data class StatusResponse(
     val totalEvents: Int,
 
     @SerializedName("pi_info")
-    val piInfo: PiInfo
+    val piInfo: PiInfo?
 )
 
 data class PiInfo(

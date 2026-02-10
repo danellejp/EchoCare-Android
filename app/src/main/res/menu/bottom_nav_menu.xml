@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Bottom Navigation Menu
+
+    4 items matching the navigation graph destinations.
+    IDs must match the fragment IDs in nav_graph.xml for automatic
+    integration with NavigationUI.
+
+    Using built-in Material icons (ic_*). If these don't exist,
+    Android Studio will show an error — see GUIDE.md for adding icons.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboardFragment"
+        android:icon="@drawable/ic_dashboard"
+        android:title="@string/nav_dashboard" />
+
+    <item
+        android:id="@+id/chartsFragment"
+        android:icon="@drawable/ic_charts"
+        android:title="@string/nav_charts" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/nav_settings" />
+
+    <item
+        android:id="@+id/environmentInfoFragment"
+        android:icon="@drawable/ic_environment"
+        android:title="@string/nav_environment" />
+
+</menu>

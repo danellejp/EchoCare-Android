@@ -11,17 +11,20 @@
     <color name="background_dark">#121212</color>
     <color name="surface_light">#F5F5F5</color>
     <color name="surface_dark">#1E1E1E</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_tertiary">#9E9E9E</color>
 
     <!-- Text Colors -->
     <color name="text_primary_light">#212121</color>
     <color name="text_primary_dark">#FFFFFF</color>
-    <color name="text_secondary_light">#757575</color>
-    <color name="text_secondary_dark">#B0B0B0</color>
+    <color name="text_secondary">#757575</color>
 
     <!-- Status Colors -->
     <color name="online_green">#4CAF50</color>
     <color name="offline_red">#F44336</color>
     <color name="warning_orange">#FF9800</color>
+    <color name="error">#D32F2F</color>
 
     <!-- Cry Type Colors -->
     <color name="hungry_green">#4CAF50</color>
@@ -47,7 +50,13 @@
     <color name="card_background_light">#FFFFFF</color>
     <color name="card_background_dark">#2C2C2C</color>
 
-    <!-- Divider Colors -->
-    <color name="divider_light">#E0E0E0</color>
-    <color name="divider_dark">#424242</color>
+    <!-- Background, Service, Divider Colours -->
+    <color name="divider">#E0E0E0</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="background">#F5F5F5</color>
+
+    <!-- FILTER CHIP BACKGROUNDS                                      -->
+    <color name="chip_hungry_bg">#FFF3E0</color>
+    <color name="chip_pain_bg">#FFEBEE</color>
+    <color name="chip_normal_bg">#E3F2FD</color>
 </resources>

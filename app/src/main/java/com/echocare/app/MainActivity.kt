@@ -8,29 +8,60 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.echocare.app.service.UDPListenerService
 import com.echocare.app.util.AppConstants
 import com.echocare.app.util.IntentActions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
- * Main Activity - Entry point of the app
- * Provides controls to start/stop the UDP monitoring service
+ * Main Activity - Entry point of the EchoCare app.
+ *
+ * Manages two states:
+ * 1. LANDING PAGE (shown initially):
+ *    - Welcome screen with monitoring controls (Start/Stop from Milestone 4.2)
+ *    - "Get Started" button to enter the dashboard
+ *
+ * 2. MAIN APP (shown after "Get Started"):
+ *    - NavHostFragment hosting 4 page fragments
+ *    - BottomNavigationView with Dashboard, Charts, Settings, Info tabs
+ *    - UDP listener service continues running in background regardless of screen
+ *
+ * Preserves all functionality from Milestones 4.1-4.3:
+ *    - UDP service start/stop
+ *    - Notification permission handling
+ *    - Broadcast receiver for cry detection events
+ *    - Service status updates
  */
 class MainActivity : AppCompatActivity() {
 
-    // UI Elements
+    // =========================================================================
+    // Landing Page UI Elements (from Milestones 4.1-4.3)
+    // =========================================================================
+    private lateinit var layoutLanding: View
     private lateinit var statusTextView: TextView
     private lateinit var startButton: Button
     private lateinit var stopButton: Button
     private lateinit var lastCryTextView: TextView
+    private lateinit var btnGetStarted: Button
 
-    // Service status receiver
+    // =========================================================================
+    // Main App UI Elements (NEW - Milestone 4.4)
+    // =========================================================================
+    private lateinit var layoutMainApp: View
+    private lateinit var bottomNavigation: BottomNavigationView
+
+    // =========================================================================
+    // Broadcast Receiver (from Milestone 4.2/4.3 - UNCHANGED)
+    // =========================================================================
     private val serviceStatusReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
@@ -49,7 +80,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Permission launcher for notification permission (Android 13+)
+    // =========================================================================
+    // Permission Launcher (from Milestone 4.3 - UNCHANGED)
+    // =========================================================================
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
@@ -61,15 +94,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // =========================================================================
+    // Lifecycle
+    // =========================================================================
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize UI elements
+        // Initialize all UI elements
         initializeViews()
 
-        // Set up button click listeners
+        // Set up landing page controls (service start/stop)
         setupButtonListeners()
+
+        // Set up navigation for main app area (NEW)
+        setupNavigation()
+
+        // Set up "Get Started" button to transition landing → main app (NEW)
+        setupLandingToMainTransition()
 
         // Register broadcast receiver for service updates
         registerReceivers()
@@ -81,19 +124,63 @@ class MainActivity : AppCompatActivity() {
         checkNotificationPermission()
     }
 
+    // =========================================================================
+    // Initialization
+    // =========================================================================
+
     private fun initializeViews() {
+        // Landing page views (existing from 4.1-4.3)
+        layoutLanding = findViewById(R.id.layoutLanding)
         statusTextView = findViewById(R.id.statusTextView)
         startButton = findViewById(R.id.startButton)
         stopButton = findViewById(R.id.stopButton)
         lastCryTextView = findViewById(R.id.lastCryTextView)
+        btnGetStarted = findViewById(R.id.btnGetStarted)
+
+        // Main app views (NEW - Milestone 4.4)
+        layoutMainApp = findViewById(R.id.layoutMainApp)
+        bottomNavigation = findViewById(R.id.bottomNavigation)
 
         // Set initial text
         lastCryTextView.text = "No cries detected yet"
     }
 
+    // =========================================================================
+    // Navigation Setup (NEW - Milestone 4.4)
+    // =========================================================================
+
+    /**
+     * Sets up the Navigation component with BottomNavigationView.
+     * The NavHostFragment hosts the 4 page fragments.
+     * setupWithNavController() handles tab ↔ fragment switching automatically.
+     */
+    private fun setupNavigation() {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        bottomNavigation.setupWithNavController(navController)
+    }
+
+    /**
+     * Sets up the "Get Started" button to transition from the landing page
+     * to the main app (dashboard with bottom navigation).
+     *
+     * The UDP listener service keeps running regardless of this transition.
+     */
+    private fun setupLandingToMainTransition() {
+        btnGetStarted.setOnClickListener {
+            layoutLanding.visibility = View.GONE
+            layoutMainApp.visibility = View.VISIBLE
+        }
+    }
+
+    // =========================================================================
+    // Service Management (from Milestones 4.2/4.3 - UNCHANGED)
+    // =========================================================================
+
     private fun setupButtonListeners() {
         startButton.setOnClickListener {
-            // Check notification permission before starting
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 if (ContextCompat.checkSelfPermission(
                         this,
@@ -102,11 +189,9 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     startMonitoringService()
                 } else {
-                    // Request permission
                     notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
             } else {
-                // Android 12 and below - no permission needed
                 startMonitoringService()
             }
         }
@@ -130,14 +215,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkNotificationPermission() {
-        // Check if notification permission is needed (Android 13+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // Show explanation
                 Toast.makeText(
                     this,
                     "EchoCare needs notification permission to alert you when baby is crying",
@@ -158,7 +241,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             updateUI(true)
-
             Toast.makeText(this, "Monitoring started", Toast.LENGTH_SHORT).show()
 
         } catch (e: Exception) {
@@ -173,16 +255,17 @@ class MainActivity : AppCompatActivity() {
             stopService(intent)
 
             updateUI(false)
-
             Toast.makeText(this, "Monitoring stopped", Toast.LENGTH_SHORT).show()
-
-            // Clear last cry text
             lastCryTextView.text = "No cries detected yet"
 
         } catch (e: Exception) {
             Toast.makeText(this, "Failed to stop monitoring: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
+
+    // =========================================================================
+    // UI Updates (from Milestones 4.2/4.3 - UNCHANGED)
+    // =========================================================================
 
     private fun updateUI(isServiceRunning: Boolean) {
         if (isServiceRunning) {
@@ -199,12 +282,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun formatTimestamp(timestamp: String): String {
-        // Simple formatting - extract time from ISO format
         return try {
             val parts = timestamp.split("T")
             if (parts.size > 1) {
-                val timePart = parts[1].split(".")[0] // Remove milliseconds
-                timePart.substring(0, 5) // HH:MM
+                val timePart = parts[1].split(".")[0]
+                timePart.substring(0, 5)
             } else {
                 timestamp
             }
@@ -213,15 +295,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // =========================================================================
+    // Lifecycle (from Milestones 4.2/4.3 - UNCHANGED)
+    // =========================================================================
+
     override fun onResume() {
         super.onResume()
-        // Update UI when returning to app
         updateUI(UDPListenerService.isRunning)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        // Unregister receiver to prevent memory leaks
         try {
             unregisterReceiver(serviceStatusReceiver)
         } catch (e: Exception) {

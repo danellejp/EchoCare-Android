@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Navigation Graph for EchoCare
+
+    4 top-level destinations matching BottomNavigationView:
+    1. Dashboard (start destination)
+    2. Charts
+    3. Settings
+    4. Environment Info
+-->
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.echocare.app.ui.dashboard.DashboardFragment"
+        android:label="@string/nav_dashboard" />
+
+    <fragment
+        android:id="@+id/chartsFragment"
+        android:name="com.echocare.app.ui.charts.ChartsFragment"
+        android:label="@string/nav_charts" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.echocare.app.ui.settings.SettingsFragment"
+        android:label="@string/nav_settings" />
+
+    <fragment
+        android:id="@+id/environmentInfoFragment"
+        android:name="com.echocare.app.ui.environment.EnvironmentInfoFragment"
+        android:label="@string/nav_environment" />
+
+</navigation>
