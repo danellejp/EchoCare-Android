@@ -23,7 +23,7 @@
     <string name="no_events_message">No crying events recorded yet</string>
     <string name="filter_all">All</string>
     <string name="filter_hungry">Hungry</string>
-    <string name="filter_pain">Discomfort</string>
+    <string name="filter_pain">Pain</string>
     <string name="filter_normal">Normal</string>
     <string name="time_range_24h">Last 24 Hours</string>
     <string name="time_range_week">Past Week</string>
@@ -117,7 +117,7 @@
 
     <!-- PERMISSIONS                                                  -->
     <string name="permission_notification_title">Notification Permission Required</string>
-    <string name="permission_notification_message">EchoCare needs notification permission to alert you when your baby is crying.</string>
+    <string name="permission_notification_message">EchoCare needs notification permission for real-time alerts</string>
     <string name="permission_grant">Grant Permission</string>
     <string name="permission_deny">Not Now</string>
 

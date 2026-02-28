@@ -56,7 +56,7 @@
     <color name="background">#F5F5F5</color>
 
     <!-- FILTER CHIP BACKGROUNDS                                      -->
-    <color name="chip_hungry_bg">#FFF3E0</color>
+    <color name="chip_hungry_bg">#ECFDBC</color>
     <color name="chip_pain_bg">#FFEBEE</color>
     <color name="chip_normal_bg">#E3F2FD</color>
 </resources>

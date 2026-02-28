@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var statusTextView: TextView
     private lateinit var startButton: Button
     private lateinit var stopButton: Button
-    private lateinit var lastCryTextView: TextView
     private lateinit var btnGetStarted: Button
 
     // =========================================================================
@@ -68,13 +67,6 @@ class MainActivity : AppCompatActivity() {
                 IntentActions.SERVICE_STATUS_CHANGED -> {
                     val isRunning = intent.getBooleanExtra("is_running", false)
                     updateUI(isRunning)
-                }
-                IntentActions.CRY_DETECTED -> {
-                    val cryType = intent.getStringExtra("cry_type") ?: "Unknown"
-                    val confidence = intent.getIntExtra("confidence", 0)
-                    val timestamp = intent.getStringExtra("timestamp") ?: ""
-
-                    lastCryTextView.text = "Last cry: $cryType ($confidence%) at ${formatTimestamp(timestamp)}"
                 }
             }
         }
@@ -134,15 +126,12 @@ class MainActivity : AppCompatActivity() {
         statusTextView = findViewById(R.id.statusTextView)
         startButton = findViewById(R.id.startButton)
         stopButton = findViewById(R.id.stopButton)
-        lastCryTextView = findViewById(R.id.lastCryTextView)
         btnGetStarted = findViewById(R.id.btnGetStarted)
 
         // Main app views (NEW - Milestone 4.4)
         layoutMainApp = findViewById(R.id.layoutMainApp)
         bottomNavigation = findViewById(R.id.bottomNavigation)
 
-        // Set initial text
-        lastCryTextView.text = "No cries detected yet"
     }
 
     // =========================================================================
@@ -223,7 +212,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(
                     this,
-                    "EchoCare needs notification permission to alert you when baby is crying",
+                    "EchoCare needs notification permission for real-time alerts",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -256,7 +245,6 @@ class MainActivity : AppCompatActivity() {
 
             updateUI(false)
             Toast.makeText(this, "Monitoring stopped", Toast.LENGTH_SHORT).show()
-            lastCryTextView.text = "No cries detected yet"
 
         } catch (e: Exception) {
             Toast.makeText(this, "Failed to stop monitoring: ${e.message}", Toast.LENGTH_LONG).show()

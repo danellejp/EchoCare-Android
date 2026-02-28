@@ -126,16 +126,6 @@
                     android:textColor="@color/text_secondary"
                     android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:id="@+id/lastCryTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No cries detected yet"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginTop="12dp"
-                    android:textStyle="italic" />
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
