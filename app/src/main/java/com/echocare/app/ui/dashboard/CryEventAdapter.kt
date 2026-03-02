@@ -14,11 +14,11 @@ import com.echocare.app.data.model.CryEvent
 /**
  * RecyclerView adapter for displaying cry events on the Dashboard.
  *
- * Uses ListAdapter with DiffUtil for efficient updates — only items
+ * Uses ListAdapter with DiffUtil for efficient updates - only items
  * that actually changed get rebound, which avoids flickering on refresh.
  *
  * Each item shows:
- *   - Cry type with color-coded indicator
+ *   - Cry type with colour-coded indicator
  *   - Relative time (e.g. "2h ago")
  *   - Full date/time
  *   - Classification confidence percentage
@@ -69,7 +69,7 @@ class CryEventAdapter : ListAdapter<CryEvent, CryEventAdapter.CryEventViewHolder
         }
 
         /**
-         * Maps cry type string to a color resource.
+         * Maps cry type string to a colour resource.
          */
         private fun getCryTypeColor(cryType: String): Int {
             return when (cryType.lowercase()) {

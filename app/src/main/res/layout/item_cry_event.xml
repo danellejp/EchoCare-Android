@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Color-coded type indicator bar (left edge) -->
+        <!-- Colour-coded type indicator bar (left edge) -->
         <View
             android:id="@+id/viewTypeIndicator"
             android:layout_width="6dp"

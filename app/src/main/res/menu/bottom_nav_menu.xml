@@ -6,8 +6,7 @@
     IDs must match the fragment IDs in nav_graph.xml for automatic
     integration with NavigationUI.
 
-    Using built-in Material icons (ic_*). If these don't exist,
-    Android Studio will show an error — see GUIDE.md for adding icons.
+    Using built-in Material icons (ic_*)
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 

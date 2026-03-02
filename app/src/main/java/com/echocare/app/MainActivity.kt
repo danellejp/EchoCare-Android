@@ -27,7 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *
  * Manages two states:
  * 1. LANDING PAGE (shown initially):
- *    - Welcome screen with monitoring controls (Start/Stop from Milestone 4.2)
+ *    - Welcome screen with monitoring controls (Start/Stop)
  *    - "Get Started" button to enter the dashboard
  *
  * 2. MAIN APP (shown after "Get Started"):
@@ -35,7 +35,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *    - BottomNavigationView with Dashboard, Charts, Settings, Info tabs
  *    - UDP listener service continues running in background regardless of screen
  *
- * Preserves all functionality from Milestones 4.1-4.3:
+ * Preserves all functionality:
  *    - UDP service start/stop
  *    - Notification permission handling
  *    - Broadcast receiver for cry detection events
@@ -44,7 +44,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     // =========================================================================
-    // Landing Page UI Elements (from Milestones 4.1-4.3)
+    // Landing Page UI Elements
     // =========================================================================
     private lateinit var layoutLanding: View
     private lateinit var statusTextView: TextView
@@ -53,13 +53,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnGetStarted: Button
 
     // =========================================================================
-    // Main App UI Elements (NEW - Milestone 4.4)
+    // Main App UI Elements
     // =========================================================================
     private lateinit var layoutMainApp: View
     private lateinit var bottomNavigation: BottomNavigationView
 
     // =========================================================================
-    // Broadcast Receiver (from Milestone 4.2/4.3 - UNCHANGED)
+    // Broadcast Receiver
     // =========================================================================
     private val serviceStatusReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =========================================================================
-    // Permission Launcher (from Milestone 4.3 - UNCHANGED)
+    // Permission Launcher
     // =========================================================================
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -100,10 +100,10 @@ class MainActivity : AppCompatActivity() {
         // Set up landing page controls (service start/stop)
         setupButtonListeners()
 
-        // Set up navigation for main app area (NEW)
+        // Set up navigation for main app area
         setupNavigation()
 
-        // Set up "Get Started" button to transition landing → main app (NEW)
+        // Set up "Get Started" button to transition landing → main app
         setupLandingToMainTransition()
 
         // Register broadcast receiver for service updates
@@ -121,21 +121,21 @@ class MainActivity : AppCompatActivity() {
     // =========================================================================
 
     private fun initializeViews() {
-        // Landing page views (existing from 4.1-4.3)
+        // Landing page views
         layoutLanding = findViewById(R.id.layoutLanding)
         statusTextView = findViewById(R.id.statusTextView)
         startButton = findViewById(R.id.startButton)
         stopButton = findViewById(R.id.stopButton)
         btnGetStarted = findViewById(R.id.btnGetStarted)
 
-        // Main app views (NEW - Milestone 4.4)
+        // Main app views
         layoutMainApp = findViewById(R.id.layoutMainApp)
         bottomNavigation = findViewById(R.id.bottomNavigation)
 
     }
 
     // =========================================================================
-    // Navigation Setup (NEW - Milestone 4.4)
+    // Navigation Setup
     // =========================================================================
 
     /**
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =========================================================================
-    // Service Management (from Milestones 4.2/4.3 - UNCHANGED)
+    // Service Management
     // =========================================================================
 
     private fun setupButtonListeners() {
@@ -252,7 +252,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =========================================================================
-    // UI Updates (from Milestones 4.2/4.3 - UNCHANGED)
+    // UI Updates
     // =========================================================================
 
     private fun updateUI(isServiceRunning: Boolean) {
@@ -284,7 +284,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =========================================================================
-    // Lifecycle (from Milestones 4.2/4.3 - UNCHANGED)
+    // Lifecycle
     // =========================================================================
 
     override fun onResume() {

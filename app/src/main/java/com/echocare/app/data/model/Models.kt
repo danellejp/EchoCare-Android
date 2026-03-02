@@ -98,16 +98,16 @@ data class CryEvent(
     fun getCryTypeDisplay(): String {
         return when (cryType.lowercase()) {
             "hungry" -> "Hungry"
-            "pain" -> "Discomfort"
+            "pain" -> "Pain"
             "normal" -> "Normal"
             else -> cryType
         }
     }
 
     /**
-     * Returns the classification confidence as a percentage integer (e.g. 85).
-     * Null-safe: falls back to detection confidence if classification is null.
-     * Used by CryEventAdapter for the confidence badge on each card.
+     * Returns the classification confidence as a percentage integer (e.g. 85)
+     * Null-safe: falls back to detection confidence if classification is null
+     * Used by CryEventAdapter for the confidence badge on each card
      */
     fun classificationPercent(): Int {
         val conf = classificationConfidence ?: detectionConfidence
@@ -115,14 +115,14 @@ data class CryEvent(
     }
 
     /**
-     * Returns the detection confidence as a percentage integer.
+     * Returns the detection confidence as a percentage integer
      */
     fun detectionPercent(): Int = (detectionConfidence * 100).toInt()
 
     /**
      * Formats the timestamp into a full date/time string.
      * Example: "22 Jan 2026, 10:30"
-     * Uses SimpleDateFormat for reliable parsing (handles microseconds etc).
+     * Uses SimpleDateFormat for reliable parsing (handles microseconds)
      * Used by CryEventAdapter for the secondary date line on each card.
      */
     fun formattedDateTime(): String {
@@ -281,7 +281,7 @@ data class UDPNotification(
     fun getCryTypeDisplay(): String {
         return when (cryType.lowercase()) {
             "hungry" -> "Hungry"
-            "pain" -> "Discomfort"
+            "pain" -> "Pain"
             "normal" -> "Crying"
             else -> cryType
         }

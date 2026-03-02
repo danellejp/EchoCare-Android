@@ -38,7 +38,7 @@ interface EchoCareApiService {
      * @param limit Max number of events to return (1-50, default 50).
      * @return RecentEventsResponse containing list of CryEvent objects.
      *
-     * Note: The Pi returns events ordered by timestamp DESC (most recent first).
+     * The Pi returns events ordered by timestamp DESC (most recent first).
      * Filtering by time range and cry type is done client-side since
      * the Pi's endpoint doesn't support those query params natively.
      */

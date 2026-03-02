@@ -20,7 +20,7 @@
 
     <!-- ================================================================== -->
     <!-- MAIN APP CONTENT (NavHost + Bottom Nav)                            -->
-    <!-- Initially GONE — shown after "Get Started"                         -->
+    <!-- Initially GONE - shown after "Get Started"                         -->
     <!-- ================================================================== -->
     <LinearLayout
         android:id="@+id/layoutMainApp"
@@ -159,7 +159,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
-        <!-- GET STARTED Button (NEW — Milestone 4.4) -->
+        <!-- GET STARTED Button -->
         <Button
             android:id="@+id/btnGetStarted"
             android:layout_width="0dp"

@@ -93,7 +93,7 @@ class UDPListenerService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        // We don't provide binding, so return null
+        // no binding, so return null
         return null
     }
 
@@ -221,7 +221,7 @@ class UDPListenerService : Service() {
                     putExtra("timestamp", notification.timestamp)
                 })
 
-                Log.d(TAG, "✅ Cry notification sent: ${notification.getCryTypeDisplay()} " +
+                Log.d(TAG, "Cry notification sent: ${notification.getCryTypeDisplay()} " +
                         "(${notification.getDisplayConfidence()}%)")
             } else {
                 Log.w(TAG, "Ignored notification with empty cry_type")

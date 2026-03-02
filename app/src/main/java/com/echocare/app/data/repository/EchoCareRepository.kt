@@ -39,7 +39,7 @@ class EchoCareRepository {
         cryTypeFilter: String? = null
     ): Result<List<CryEvent>> = withContext(Dispatchers.IO) {
         try {
-            // Fetch max events from Pi (we filter client-side)
+            // Fetch max events from Pi (filter client-side)
             val response = apiService.getRecentEvents(limit = 50)
 
             if (response.isSuccessful && response.body() != null) {
