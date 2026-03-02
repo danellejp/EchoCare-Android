@@ -23,6 +23,10 @@ import kotlinx.coroutines.*
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
+import com.echocare.app.data.api.RetrofitClient
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * Foreground service that listens for UDP broadcasts from Raspberry Pi
@@ -57,6 +61,10 @@ class UDPListenerService : Service() {
     // JSON parser
     private val gson = Gson()
 
+    // Polling fallback
+    private var pollingJob: Job? = null
+    private var lastKnownEventId: Int = -1
+
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "Service created")
@@ -80,6 +88,7 @@ class UDPListenerService : Service() {
         // Start UDP listener if not already running
         if (!isRunning) {
             startUDPListener()
+            startPollingFallback()
             isRunning = true
 
             // Broadcast service status change
@@ -143,7 +152,8 @@ class UDPListenerService : Service() {
                         val packet = DatagramPacket(buffer, buffer.size)
 
                         // Block until packet received
-                        udpSocket?.receive(packet)
+                        //udpSocket?.receive(packet)
+                        delay(Long.MAX_VALUE) // for testing polling
 
                         // Extract message from packet
                         val message = String(packet.data, 0, packet.length)
@@ -194,6 +204,8 @@ class UDPListenerService : Service() {
         // Close socket
         udpSocket?.close()
         udpSocket = null
+
+        stopPollingFallback()
     }
 
     /**
@@ -223,6 +235,18 @@ class UDPListenerService : Service() {
 
                 Log.d(TAG, "Cry notification sent: ${notification.getCryTypeDisplay()} " +
                         "(${notification.getDisplayConfidence()}%)")
+
+                serviceScope.launch {
+                    try {
+                        val response = RetrofitClient.apiService.getEventsByType(limit = 1)
+                        if (response.isSuccessful) {
+                            val events = response.body()?.events
+                            val id = events?.firstOrNull()?.id ?: -1
+                            if (id > lastKnownEventId) lastKnownEventId = id
+                        }
+                    } catch (_: Exception) {}
+                }
+
             } else {
                 Log.w(TAG, "Ignored notification with empty cry_type")
             }
@@ -231,6 +255,77 @@ class UDPListenerService : Service() {
             Log.e(TAG, "Failed to parse UDP message: ${e.message}")
             Log.e(TAG, "Raw message: $message")
         }
+    }
+
+    /**
+     * Start polling the API as a fallback for missed UDP packets.
+     * Checks every 2 seconds for new events.
+     */
+    private fun startPollingFallback() {
+        Log.d(TAG, "Starting polling fallback")
+
+        pollingJob = serviceScope.launch {
+            // Wait a bit before first poll to let UDP handle it
+            delay(5_000)
+
+            while (isActive && isRunning) {
+                try {
+                    val response = RetrofitClient.apiService.getEventsByType(limit = 1)
+
+                    if (response.isSuccessful) {
+                        val events = response.body()?.events
+
+                        if (!events.isNullOrEmpty()) {
+                            val latestEvent = events[0]
+                            val eventId = latestEvent.id
+
+                            if (lastKnownEventId == -1) {
+                                lastKnownEventId = eventId
+                                Log.d(TAG, "Polling: Initial event ID = $lastKnownEventId")
+                            } else if (eventId > lastKnownEventId) {
+                                Log.d(TAG, "Polling: New event detected (ID $eventId > $lastKnownEventId)")
+                                lastKnownEventId = eventId
+
+                                val notification = UDPNotification(
+                                    cryType = latestEvent.cryType,
+                                    detectionConfidence = latestEvent.detectionConfidence,
+                                    classificationConfidence = latestEvent.classificationConfidence,
+                                    temperature = latestEvent.temperature,
+                                    humidity = latestEvent.humidity,
+                                    timestamp = latestEvent.timestamp
+                                )
+
+                                notificationHelper.showCryNotification(notification)
+
+                                sendBroadcast(Intent(IntentActions.CRY_DETECTED).apply {
+                                    putExtra("cry_type", notification.getCryTypeDisplay())
+                                    putExtra("confidence", notification.getDisplayConfidence())
+                                    putExtra("temperature", latestEvent.temperature ?: 0.0)
+                                    putExtra("humidity", latestEvent.humidity ?: 0.0)
+                                    putExtra("timestamp", latestEvent.timestamp)
+                                })
+
+                                Log.d(TAG, "Polling fallback: Sent notification for ${latestEvent.cryType}")
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Polling fallback error: ${e.message}")
+                }
+
+                // Wait 2 seconds before next poll
+                delay(2_000)
+            }
+        }
+    }
+
+    /**
+     * Stop the polling fallback
+     */
+    private fun stopPollingFallback() {
+        pollingJob?.cancel()
+        pollingJob = null
+        Log.d(TAG, "Polling fallback stopped")
     }
 
     /**
