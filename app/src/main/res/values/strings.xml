@@ -139,4 +139,18 @@
     <string name="avg_temperature">Avg Temperature</string>
     <string name="avg_humidity">Avg Humidity</string>
     <string name="most_common_type">Most Common</string>
+
+    <!-- Charts/Visualisation Page (Milestone 4.5) -->
+    <string name="charts_title">Cry Analytics</string>
+    <string name="charts_subtitle">Visual breakdown of cry events</string>
+    <string name="chart_distribution_title">Cry Type Distribution</string>
+    <string name="chart_timeline_title">Cry Timeline (Hour of Day)</string>
+    <string name="charts_no_data">No cry data available.\nEvents will appear here after detection.</string>
+    <string name="charts_error">Unable to load chart data.\nPull down to retry.</string>
+    <string name="charts_loading">Loading charts...</string>
+    <string name="charts_time_filter_24h">Past 24 Hours</string>
+    <string name="charts_time_filter_7d">Past 7 Days</string>
+    <string name="charts_total_cries">Total Cries</string>
+    <string name="charts_most_common">Most Common</string>
+    <string name="charts_last_cry">Last Cry</string>
 </resources>
