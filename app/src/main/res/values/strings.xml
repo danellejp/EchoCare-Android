@@ -142,7 +142,7 @@
 
     <!-- Charts/Visualisation Page (Milestone 4.5) -->
     <string name="charts_title">Cry Analytics</string>
-    <string name="charts_subtitle">Visual breakdown of cry events</string>
+    <string name="charts_subtitle">Visual Breakdown of Cry Events</string>
     <string name="chart_distribution_title">Cry Type Distribution</string>
     <string name="chart_timeline_title">Cry Timeline (Hour of Day)</string>
     <string name="charts_no_data">No cry data available.\nEvents will appear here after detection.</string>
