@@ -32,7 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *
  * 2. MAIN APP (shown after "Get Started"):
  *    - NavHostFragment hosting 4 page fragments
- *    - BottomNavigationView with Dashboard, Charts, Settings, Info tabs
+ *    - BottomNavigationView with Dashboard, Charts, Science, Info tabs
  *    - UDP listener service continues running in background regardless of screen
  *
  * Preserves all functionality:

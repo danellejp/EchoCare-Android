@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Page Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/science_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/science_subtitle"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Section 1: What Are Mel-Spectrograms?                        -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_spectrograms_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_spectrograms_description"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- Section 2: Cry Type Spectrograms with Audio Playback          -->
+
+        <!-- Hungry Cry -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title + Play Button Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/science_hungry_title"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#4CAF50" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPlayHungry"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="@string/play_cry"
+                        android:textSize="12sp"
+                        app:icon="@android:drawable/ic_media_play"
+                        app:iconSize="16dp" />
+
+                </LinearLayout>
+
+                <!-- Spectrogram Image -->
+                <ImageView
+                    android:id="@+id/imgSpectrogramHungry"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/melspec_hungry"
+                    android:contentDescription="Mel-spectrogram of a hungry cry"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent" />
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_hungry_description"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Pain Cry -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title + Play Button Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/science_pain_title"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#F44336" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPlayPain"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="@string/play_cry"
+                        android:textSize="12sp"
+                        app:icon="@android:drawable/ic_media_play"
+                        app:iconSize="16dp" />
+
+                </LinearLayout>
+
+                <!-- Spectrogram Image -->
+                <ImageView
+                    android:id="@+id/imgSpectrogramPain"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/melspec_pain"
+                    android:contentDescription="Mel-spectrogram of a pain cry"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent" />
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_pain_description"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Normal Cry -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title + Play Button Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/science_normal_title"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#2196F3" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPlayNormal"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="@string/play_cry"
+                        android:textSize="12sp"
+                        app:icon="@android:drawable/ic_media_play"
+                        app:iconSize="16dp" />
+
+                </LinearLayout>
+
+                <!-- Spectrogram Image -->
+                <ImageView
+                    android:id="@+id/imgSpectrogramNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/melspec_normal"
+                    android:contentDescription="Mel-spectrogram of a normal cry"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent" />
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_normal_description"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- "Can you tell the difference?" message -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/science_tell_difference"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp" />
+
+
+        <!-- Section 3: The Dataset                                        -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_dataset_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_dataset_description"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- Section 4: Your Baby's Privacy                                -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_privacy_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_privacy_description"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- Section 5: Future Work                                        -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_future_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/science_future_description"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

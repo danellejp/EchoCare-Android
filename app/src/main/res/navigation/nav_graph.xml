@@ -5,7 +5,7 @@
     4 top-level destinations matching BottomNavigationView:
     1. Dashboard (start destination)
     2. Charts
-    3. Settings
+    3. Science
     4. Environment Info
 -->
 <navigation
@@ -27,9 +27,9 @@
         tools:layout="@layout/fragment_charts" />
 
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.echocare.app.ui.settings.SettingsFragment"
-        android:label="@string/nav_settings" />
+        android:id="@+id/scienceFragment"
+        android:name="com.echocare.app.ui.science.ScienceFragment"
+        android:label="@string/nav_science" />
 
     <fragment
         android:id="@+id/environmentInfoFragment"

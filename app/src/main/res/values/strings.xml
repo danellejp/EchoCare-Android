@@ -14,7 +14,7 @@
     <string name="nav_dashboard">Dashboard</string>
     <string name="nav_visualization">Analytics</string>
     <string name="nav_charts">Charts</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_science">Science</string>
     <string name="nav_environment">Environment</string>
 
     <!-- DASHBOARD                                                    -->
@@ -57,24 +57,6 @@
     <string name="viz_hourly_pattern">Hourly Pattern</string>
     <string name="no_data_available">No data available for selected period</string>
 
-    <!-- SETTINGS PAGE                                                -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_notifications">Notifications</string>
-    <string name="settings_notifications_summary">Enable cry detection alerts</string>
-    <string name="settings_vibration">Vibration</string>
-    <string name="settings_vibration_summary">Vibrate when notification received</string>
-    <string name="settings_theme">Theme</string>
-    <string name="settings_theme_summary">Choose app appearance</string>
-    <string name="settings_monitoring">Monitoring Service</string>
-    <string name="settings_start_service">Start Monitoring</string>
-    <string name="settings_stop_service">Stop Monitoring</string>
-    <string name="settings_service_status">Service Status</string>
-
-    <!-- Theme Options -->
-    <string name="theme_light">Light</string>
-    <string name="theme_dark">Dark</string>
-    <string name="theme_system">System Default</string>
-
     <!-- ENVIRONMENT PAGE                                             -->
     <string name="env_title">Environment Info</string>
     <string name="env_current_conditions">Current Conditions</string>
@@ -86,13 +68,6 @@
     <string name="env_optimal_humidity">Optimal humidity for infants is 40–60%</string>
     <string name="env_temp_info">Temperature affects infant comfort and sleep quality. Too cold or too hot environments can cause distress.</string>
     <string name="env_humidity_info">Proper humidity prevents dry skin and respiratory issues. Low humidity can irritate airways, while high humidity promotes mold growth.</string>
-
-    <!-- PI CONNECTION STATUS                                         -->
-    <string name="pi_status_online">Online</string>
-    <string name="pi_status_offline">Offline</string>
-    <string name="pi_last_seen">Last seen: %s</string>
-    <string name="pi_monitoring_active">Monitoring active</string>
-    <string name="pi_connection_lost">Connection lost</string>
 
     <!-- NOTIFICATIONS                                                -->
     <string name="notif_channel_name">Cry Alerts</string>
@@ -140,7 +115,7 @@
     <string name="avg_humidity">Avg Humidity</string>
     <string name="most_common_type">Most Common</string>
 
-    <!-- Charts/Visualisation Page (Milestone 4.5) -->
+    <!-- Charts/Visualisation Page -->
     <string name="charts_title">Cry Analytics</string>
     <string name="charts_subtitle">Visual Breakdown of Cry Events</string>
     <string name="chart_distribution_title">Cry Type Distribution</string>
@@ -153,4 +128,34 @@
     <string name="charts_total_cries">Total Cries</string>
     <string name="charts_most_common">Most Common</string>
     <string name="charts_last_cry">Last Cry</string>
+
+    <!-- Science Page -->
+    <string name="science_title">The Science Behind EchoCare</string>
+    <string name="science_subtitle">How Machine Learning Detects and Classifies Your Baby\'s Cries</string>
+
+    <string name="science_spectrograms_title">What Are Mel-Spectrograms?</string>
+    <string name="science_spectrograms_description">A mel-spectrogram is a visual representation of sound. It converts audio into an image where the x-axis represents time, the y-axis represents frequency (pitch) and the colour intensity represents volume. The \"mel\" scale mimics how humans perceive pitch - we notice differences more at lower frequencies than higher ones.\n\nEchoCare converts each 1-second audio capture into a mel-spectrogram image, which is then analysed by our machine learning models. This approach is widely used in audio classification because patterns that are difficult to detect in raw audio become visually distinct in mel-spectrogram form.</string>
+
+    <string name="science_hungry_title">Hungry Cry</string>
+    <string name="science_hungry_description">This mel-spectrogram shows a rhythmic, repetitive pattern with bright yellow energy concentrated in the lower-to-mid frequency bands. The dark purple region at the top indicates less high-frequency energy compared to pain cries. The repeating bright patches suggest the classic cry–pause–cry cycle, with gradually building intensity as the baby signals its need for feeding.</string>
+
+    <string name="science_pain_title">Pain Cry</string>
+    <string name="science_pain_description">Pain cries tend to be sharper, more intense and higher in pitch compared to hungry and normal cries. This mel-spectrogram shows strong energy across a wide frequency range with numerous stacked bands, indicating short high-pitch bursts. The initial burst is typically louder and more abrupt. Overall, pain cries tend to be loud and forceful.</string>
+
+    <string name="science_normal_title">Normal Cry</string>
+    <string name="science_normal_description">This mel-spectrogram shows distinct, separated energy bursts with clear gaps between them, visible as alternating bright and dark vertical sections. The energy is concentrated in the mid-frequency range with moderate intensity. The pattern is less regular than hungry cries and less intense than pain cries, reflecting general fussiness, discomfort or tiredness rather than a specific urgent need.</string>
+
+    <string name="science_tell_difference">🎧 Can you tell the difference?</string>
+
+    <string name="science_dataset_title">The Dataset</string>
+    <string name="science_dataset_description">EchoCare\'s classification models were trained on the Baby Chillanto database, a clinically verified dataset developed by the National Institute of Astrophysics, Optics and Electronics in Mexico. The dataset contains carefully recorded and labelled infant cry samples collected by medical doctors from several specialties directly in pediatric or specialised hospitals, ensuring accurate cry type classifications.\n\nClinical verification means each cry was recorded, observed and labelled by medical professionals, making it one of the most reliable infant cry datasets available for research.</string>
+
+    <string name="science_privacy_title">Your Baby\'s Privacy</string>
+    <string name="science_privacy_description">EchoCare processes everything locally on the Raspberry Pi in your home. No audio recordings, cry data or personal information ever leaves your local network. There are no cloud servers, no internet connection required and no third-party access to your baby\'s data.\n\nAll audio is analysed in real-time and immediately discarded after classification - only the cry type, timestamp and environmental readings are stored locally on the Pi. Your baby\'s privacy is completely protected by design.</string>
+
+    <string name="science_future_title">Future Work</string>
+    <string name="science_future_description">EchoCare\'s classification accuracy will continue to improve as more reliable, clinically verified datasets become available. Future developments include expanding cry type categories (tired, colic), training on larger and more diverse populations, and implementing personalised learning that adapts to your specific baby\'s cry patterns over time.</string>
+
+    <string name="play_cry">Play</string>
+    <string name="stop_cry">Stop</string>
 </resources>

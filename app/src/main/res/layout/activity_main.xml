@@ -8,7 +8,7 @@
        - "Get Started" button added at the bottom
 
     2. layoutMainApp (GONE initially):
-       - NavHostFragment for the 4 page fragments (Dashboard, Charts, Settings, Info)
+       - NavHostFragment for the 4 page fragments (Dashboard, Charts, Science, Info)
        - BottomNavigationView for tab switching
        - Shown after user taps "Get Started"
 -->

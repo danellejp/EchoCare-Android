@@ -21,9 +21,9 @@
         android:title="@string/nav_charts" />
 
     <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/nav_settings" />
+        android:id="@+id/scienceFragment"
+        android:icon="@drawable/ic_science"
+        android:title="@string/nav_science" />
 
     <item
         android:id="@+id/environmentInfoFragment"
