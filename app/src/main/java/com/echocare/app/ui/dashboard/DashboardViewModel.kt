@@ -27,7 +27,6 @@ class DashboardViewModel : ViewModel() {
 
     private val repository = EchoCareRepository()
     private val TAG = "DashboardViewModel"
-    private var timeSynced = false
 
     // =========================================================================
     // LiveData — observed by the Fragment
@@ -84,11 +83,8 @@ class DashboardViewModel : ViewModel() {
         _errorMessage.value = null
 
         viewModelScope.launch {
-            // Sync Pi time once on first load
-            if (!timeSynced) {
-                repository.syncPiTime()
-                timeSynced = true
-            }
+            // Sync Pi time on every refresh
+            repository.syncPiTime()
 
             val result = repository.getCryEvents(
                 hoursBack = currentHoursBack,

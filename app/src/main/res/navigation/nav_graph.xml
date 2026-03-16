@@ -34,6 +34,7 @@
     <fragment
         android:id="@+id/environmentInfoFragment"
         android:name="com.echocare.app.ui.environment.EnvironmentInfoFragment"
-        android:label="@string/nav_environment" />
+        android:label="@string/nav_environment"
+        tools:layout="@layout/fragment_environment" />
 
 </navigation>

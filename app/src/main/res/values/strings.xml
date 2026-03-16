@@ -57,18 +57,6 @@
     <string name="viz_hourly_pattern">Hourly Pattern</string>
     <string name="no_data_available">No data available for selected period</string>
 
-    <!-- ENVIRONMENT PAGE                                             -->
-    <string name="env_title">Environment Info</string>
-    <string name="env_current_conditions">Current Conditions</string>
-    <string name="env_temperature_label">Temperature</string>
-    <string name="env_humidity_label">Humidity</string>
-    <string name="env_recommendations">Recommendations</string>
-    <string name="env_learn_more">Learn More</string>
-    <string name="env_optimal_temp">Optimal temperature for infants is 18–22°C (64–72°F)</string>
-    <string name="env_optimal_humidity">Optimal humidity for infants is 40–60%</string>
-    <string name="env_temp_info">Temperature affects infant comfort and sleep quality. Too cold or too hot environments can cause distress.</string>
-    <string name="env_humidity_info">Proper humidity prevents dry skin and respiratory issues. Low humidity can irritate airways, while high humidity promotes mold growth.</string>
-
     <!-- NOTIFICATIONS                                                -->
     <string name="notif_channel_name">Cry Alerts</string>
     <string name="notif_channel_description">Notifications for detected baby cries</string>
@@ -132,30 +120,51 @@
     <!-- Science Page -->
     <string name="science_title">The Science Behind EchoCare</string>
     <string name="science_subtitle">How Machine Learning Detects and Classifies Your Baby\'s Cries</string>
-
     <string name="science_spectrograms_title">What Are Mel-Spectrograms?</string>
     <string name="science_spectrograms_description">A mel-spectrogram is a visual representation of sound. It converts audio into an image where the x-axis represents time, the y-axis represents frequency (pitch) and the colour intensity represents volume. The \"mel\" scale mimics how humans perceive pitch - we notice differences more at lower frequencies than higher ones.\n\nEchoCare converts each 1-second audio capture into a mel-spectrogram image, which is then analysed by our machine learning models. This approach is widely used in audio classification because patterns that are difficult to detect in raw audio become visually distinct in mel-spectrogram form.</string>
-
     <string name="science_hungry_title">Hungry Cry</string>
     <string name="science_hungry_description">This mel-spectrogram shows a rhythmic, repetitive pattern with bright yellow energy concentrated in the lower-to-mid frequency bands. The dark purple region at the top indicates less high-frequency energy compared to pain cries. The repeating bright patches suggest the classic cry–pause–cry cycle, with gradually building intensity as the baby signals its need for feeding.</string>
-
     <string name="science_pain_title">Pain Cry</string>
     <string name="science_pain_description">Pain cries tend to be sharper, more intense and higher in pitch compared to hungry and normal cries. This mel-spectrogram shows strong energy across a wide frequency range with numerous stacked bands, indicating short high-pitch bursts. The initial burst is typically louder and more abrupt. Overall, pain cries tend to be loud and forceful.</string>
-
     <string name="science_normal_title">Normal Cry</string>
     <string name="science_normal_description">This mel-spectrogram shows distinct, separated energy bursts with clear gaps between them, visible as alternating bright and dark vertical sections. The energy is concentrated in the mid-frequency range with moderate intensity. The pattern is less regular than hungry cries and less intense than pain cries, reflecting general fussiness, discomfort or tiredness rather than a specific urgent need.</string>
-
     <string name="science_tell_difference">🎧 Can you tell the difference?</string>
-
     <string name="science_dataset_title">The Dataset</string>
     <string name="science_dataset_description">EchoCare\'s classification models were trained on the Baby Chillanto database, a clinically verified dataset developed by the National Institute of Astrophysics, Optics and Electronics in Mexico. The dataset contains carefully recorded and labelled infant cry samples collected by medical doctors from several specialties directly in pediatric or specialised hospitals, ensuring accurate cry type classifications.\n\nClinical verification means each cry was recorded, observed and labelled by medical professionals, making it one of the most reliable infant cry datasets available for research.</string>
-
     <string name="science_privacy_title">Your Baby\'s Privacy</string>
     <string name="science_privacy_description">EchoCare processes everything locally on the Raspberry Pi in your home. No audio recordings, cry data or personal information ever leaves your local network. There are no cloud servers, no internet connection required and no third-party access to your baby\'s data.\n\nAll audio is analysed in real-time and immediately discarded after classification - only the cry type, timestamp and environmental readings are stored locally on the Pi. Your baby\'s privacy is completely protected by design.</string>
-
     <string name="science_future_title">Future Work</string>
     <string name="science_future_description">EchoCare\'s classification accuracy will continue to improve as more reliable, clinically verified datasets become available. Future developments include expanding cry type categories (tired, colic), training on larger and more diverse populations, and implementing personalised learning that adapts to your specific baby\'s cry patterns over time.</string>
-
     <string name="play_cry">Play</string>
     <string name="stop_cry">Stop</string>
+
+    <!-- Environment Page -->
+    <string name="env_title">Baby\'s Environment</string>
+    <string name="env_subtitle">Temperature &amp; Humidity Monitoring For Your Baby\'s Comfort</string>
+
+    <string name="env_current_title">Current Readings</string>
+    <string name="env_temperature">Temperature</string>
+    <string name="env_humidity">Humidity</string>
+    <string name="env_no_data">No sensor data available.\nReadings will appear after the first cry detection.</string>
+    <string name="env_last_updated">Last updated</string>
+
+    <string name="env_ideal_title">Ideal Ranges for Baby\'s Room</string>
+    <string name="env_ideal_temp">Temperature: 16°C - 20°C</string>
+    <string name="env_ideal_temp_detail">The recommended room temperature for a sleeping baby is between 16°C and 20°C. This range helps prevent overheating, which is a known risk factor for Sudden Infant Death Syndrome (SIDS). Most paediatricians recommend keeping the room on the cooler end of this range.</string>
+    <string name="env_ideal_humidity">Humidity: 40% - 60%</string>
+    <string name="env_ideal_humidity_detail">Maintaining humidity between 40% and 60% helps keep your baby\'s airways moist and comfortable. This range reduces the risk of dry skin, nasal congestion and respiratory irritation.</string>
+
+    <string name="env_high_temp_title">⚠️ High Temperature (&gt;22°C)</string>
+    <string name="env_high_temp_description">Overheating increases the risk of SIDS and can cause heat rash, dehydration and restless sleep. Signs of overheating include sweating, damp hair, flushed cheeks and rapid breathing. If the room is too warm, remove a layer of clothing or bedding and improve ventilation.</string>
+
+    <string name="env_low_temp_title">❄️ Low Temperature (&lt;14°C)</string>
+    <string name="env_low_temp_description">A room that is too cold can make your baby uncomfortable and disrupt sleep. Signs include cold hands and feet, fussiness and pale skin. Add an extra layer of clothing or bedding if the room is too cool.</string>
+
+    <string name="env_high_humidity_title">💧 High Humidity (&gt;70%)</string>
+    <string name="env_high_humidity_description">Excess moisture in the air can encourage mould growth, which may trigger allergies and respiratory issues. High humidity also makes warm rooms feel hotter, increasing the risk of overheating. Use a dehumidifier or improve ventilation to bring levels down.</string>
+
+    <string name="env_low_humidity_title">🏜️ Low Humidity (&lt;30%)</string>
+    <string name="env_low_humidity_description">Dry air can irritate your baby\'s nasal passages, throat and skin. This can lead to congestion, nosebleeds and eczema flare-ups. Babies are especially sensitive to dry air because their airways are smaller. A cool-mist humidifier can help maintain comfortable moisture levels.</string>
+
+    <string name="env_disclaimer">This information is for educational purposes only and should not replace professional medical advice. Always consult your paediatrician about your baby\'s specific needs.</string>
 </resources>
