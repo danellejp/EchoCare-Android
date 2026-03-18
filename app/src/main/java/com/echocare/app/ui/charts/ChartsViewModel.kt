@@ -102,14 +102,17 @@ class ChartsViewModel : ViewModel() {
                 _errorMessage.value = null
 
                 if (events.isNotEmpty()) {
-                    computeDistribution(events)
-                    computeTimeline(events)
-                    computeSummary(events)
+                    _distributionData.value = ChartDataHelper.computeDistribution(events)
+                    _timelineData.value = ChartDataHelper.computeTimeline(events)
+                    _mostCommonType.value = ChartDataHelper.findMostCommonType(events)
+
+                    // Last cry time — events are sorted newest first
+                    _lastCryTime.value = events.firstOrNull()?.timeAgo() ?: "-"
                 } else {
                     _distributionData.value = emptyMap()
                     _timelineData.value = emptyMap()
-                    _mostCommonType.value = "—"
-                    _lastCryTime.value = "—"
+                    _mostCommonType.value = "-"
+                    _lastCryTime.value = "-"
                 }
 
                 Log.d(TAG, "Loaded ${events.size} events for charts")
