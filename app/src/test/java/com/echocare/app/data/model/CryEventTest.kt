@@ -42,13 +42,13 @@ class CryEventTest {
     }
 
     @Test
-    fun `getCryTypeDisplay returns Discomfort for pain type`() {
+    fun `getCryTypeDisplay returns Pain for pain type`() {
         val event = createEvent(cryType = "Pain")
         assertEquals("Pain", event.getCryTypeDisplay())
     }
 
     @Test
-    fun `getCryTypeDisplay returns Crying for normal type`() {
+    fun `getCryTypeDisplay returns Normal for normal type`() {
         val event = createEvent(cryType = "Normal")
         assertEquals("Normal", event.getCryTypeDisplay())
     }
