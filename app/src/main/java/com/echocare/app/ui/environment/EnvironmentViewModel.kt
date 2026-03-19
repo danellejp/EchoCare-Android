@@ -116,8 +116,13 @@ class EnvironmentViewModel : ViewModel() {
                         _humidity.value = humid
                         _hasData.value = true
 
-                        evaluateTemperature(temp)
-                        evaluateHumidity(humid)
+                        val tempResult = EnvironmentEvaluator.evaluateTemperature(temp)
+                        _tempStatus.value = tempResult.label
+                        _tempStatusColor.value = tempResult.color
+
+                        val humidResult = EnvironmentEvaluator.evaluateHumidity(humid)
+                        _humidityStatus.value = humidResult.label
+                        _humidityStatusColor.value = humidResult.color
 
                         _lastUpdated.value = "Last updated: ${latestEvent.timeAgo()}"
                     } else {
