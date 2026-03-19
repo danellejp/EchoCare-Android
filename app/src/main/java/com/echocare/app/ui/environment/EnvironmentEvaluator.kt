@@ -29,9 +29,9 @@ object EnvironmentEvaluator {
     const val HUMIDITY_HIGH = 70.0
 
     // Colours
-    const val COLOR_IDEAL = 0xFF4CAF50.toInt()
-    const val COLOR_WARNING = 0xFFFF9800.toInt()
-    const val COLOR_DANGER = 0xFFF44336.toInt()
+    const val COLOR_IDEAL = 0xFF4CAF50.toInt() // Green
+    const val COLOR_WARNING = 0xFFFF9800.toInt() // Orange
+    const val COLOR_DANGER = 0xFFF44336.toInt() // Red
 
     /**
      * Result of evaluating a sensor reading.

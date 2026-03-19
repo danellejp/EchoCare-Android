@@ -67,28 +67,6 @@ class EnvironmentViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>(null)
     val errorMessage: LiveData<String?> = _errorMessage
 
-
-    // Ideal Ranges
-    companion object {
-        // Temperature ranges (°C)
-        const val TEMP_LOW = 14.0
-        const val TEMP_IDEAL_LOW = 16.0
-        const val TEMP_IDEAL_HIGH = 20.0
-        const val TEMP_HIGH = 22.0
-
-        // Humidity ranges (%)
-        const val HUMIDITY_LOW = 30.0
-        const val HUMIDITY_IDEAL_LOW = 40.0
-        const val HUMIDITY_IDEAL_HIGH = 60.0
-        const val HUMIDITY_HIGH = 70.0
-
-        // Status colours
-        val COLOR_IDEAL = Color.parseColor("#4CAF50")       // Green
-        val COLOR_WARNING = Color.parseColor("#FF9800")      // Orange
-        val COLOR_DANGER = Color.parseColor("#F44336")       // Red
-    }
-
-
     // Public Methods
     /**
      * Load the latest environment readings from the Pi.
@@ -150,64 +128,6 @@ class EnvironmentViewModel : ViewModel() {
             }
 
             _isLoading.value = false
-        }
-    }
-
-
-    // Private Helpers - evaluate readings against ideal ranges
-    /**
-     * Evaluate temperature and set status label + colour.
-     */
-    private fun evaluateTemperature(temp: Double) {
-        when {
-            temp < TEMP_LOW -> {
-                _tempStatus.value = "Too Cold"
-                _tempStatusColor.value = COLOR_DANGER
-            }
-            temp < TEMP_IDEAL_LOW -> {
-                _tempStatus.value = "Slightly Cool"
-                _tempStatusColor.value = COLOR_WARNING
-            }
-            temp <= TEMP_IDEAL_HIGH -> {
-                _tempStatus.value = "Ideal"
-                _tempStatusColor.value = COLOR_IDEAL
-            }
-            temp <= TEMP_HIGH -> {
-                _tempStatus.value = "Slightly Warm"
-                _tempStatusColor.value = COLOR_WARNING
-            }
-            else -> {
-                _tempStatus.value = "Too Hot"
-                _tempStatusColor.value = COLOR_DANGER
-            }
-        }
-    }
-
-    /**
-     * Evaluate humidity and set status label + colour.
-     */
-    private fun evaluateHumidity(humidity: Double) {
-        when {
-            humidity < HUMIDITY_LOW -> {
-                _humidityStatus.value = "Too Dry"
-                _humidityStatusColor.value = COLOR_DANGER
-            }
-            humidity < HUMIDITY_IDEAL_LOW -> {
-                _humidityStatus.value = "Slightly Dry"
-                _humidityStatusColor.value = COLOR_WARNING
-            }
-            humidity <= HUMIDITY_IDEAL_HIGH -> {
-                _humidityStatus.value = "Ideal"
-                _humidityStatusColor.value = COLOR_IDEAL
-            }
-            humidity <= HUMIDITY_HIGH -> {
-                _humidityStatus.value = "Slightly Humid"
-                _humidityStatusColor.value = COLOR_WARNING
-            }
-            else -> {
-                _humidityStatus.value = "Too Humid"
-                _humidityStatusColor.value = COLOR_DANGER
-            }
         }
     }
 }
