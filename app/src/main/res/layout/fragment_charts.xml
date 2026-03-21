@@ -37,6 +37,19 @@
                 android:textColor="@color/text_secondary"
                 android:layout_marginTop="4dp" />
 
+            <!-- Download Report Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDownloadReport"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/download_report"
+                android:textSize="13sp"
+                app:icon="@android:drawable/stat_sys_download"
+                app:iconSize="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="end" />
+
             <!-- Time Filter Toggle -->
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupTimeFilter"

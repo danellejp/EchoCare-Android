@@ -21,6 +21,9 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.chip.Chip
+import com.echocare.app.util.ReportExporter
+import com.google.android.material.button.MaterialButton
+import android.widget.Toast
 
 /**
  * Fragment for the Charts/Data Visualisation page
@@ -54,6 +57,7 @@ class ChartsFragment : Fragment() {
     private lateinit var layoutSummaryCards: LinearLayout
     private lateinit var chipCharts24h: Chip
     private lateinit var chipCharts7d: Chip
+    private lateinit var btnDownloadReport: MaterialButton
 
     // Chart colours matching the dashboard cry type colours
     private val hungryColor = Color.parseColor("#4CAF50")  // Green
@@ -79,6 +83,7 @@ class ChartsFragment : Fragment() {
         setupPullToRefresh()
         setupTimeFilter()
         observeViewModel()
+        setupDownloadButton()
 
         // Load data on first open
         viewModel.loadChartData()
@@ -101,6 +106,7 @@ class ChartsFragment : Fragment() {
         layoutSummaryCards = view.findViewById(R.id.layoutSummaryCards)
         chipCharts24h = view.findViewById(R.id.chipCharts24h)
         chipCharts7d = view.findViewById(R.id.chipCharts7d)
+        btnDownloadReport = view.findViewById(R.id.btnDownloadReport)
     }
 
     // =========================================================================
@@ -296,6 +302,19 @@ class ChartsFragment : Fragment() {
         viewModel.timelineData.observe(viewLifecycleOwner) { timeline ->
             if (timeline.isNotEmpty()) {
                 updateTimelineChart(timeline)
+            }
+        }
+    }
+
+    private fun setupDownloadButton() {
+        btnDownloadReport.setOnClickListener {
+            val events = viewModel.cryEvents.value
+            val timeRange = viewModel.timeFilterLabel.value ?: "Past 7 Days"
+
+            if (events.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), getString(R.string.report_empty), Toast.LENGTH_SHORT).show()
+            } else {
+                ReportExporter.saveReport(requireContext(), events, timeRange)
             }
         }
     }

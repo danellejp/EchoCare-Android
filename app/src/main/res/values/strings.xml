@@ -168,4 +168,8 @@
     <string name="env_low_humidity_description">Dry air can irritate your baby\'s nasal passages, throat and skin. This can lead to congestion, nosebleeds and eczema flare-ups. Babies are especially sensitive to dry air because their airways are smaller. A cool-mist humidifier can help maintain comfortable moisture levels.</string>
 
     <string name="env_disclaimer">This information is for educational purposes only and should not replace professional medical advice. Always consult your paediatrician about your baby\'s specific needs.</string>
+
+    <!-- Report Download -->
+    <string name="download_report">Download Report</string>
+    <string name="report_empty">No cry data to download. Detect some cries first!</string>
 </resources>
