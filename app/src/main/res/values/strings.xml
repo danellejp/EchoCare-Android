@@ -9,6 +9,7 @@
     <string name="landing_monitor_description">Listens for cry notifications from your Raspberry Pi on port 9999</string>
     <string name="get_started">Get Started</string>
     <string name="landing_wifi_reminder">Make sure you\'re connected to\nEchoCare-Monitor WiFi</string>
+    <string name="tagline">We Listen, You Respond</string>
 
     <!-- NAVIGATION                                                   -->
     <string name="nav_dashboard">Dashboard</string>

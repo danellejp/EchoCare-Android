@@ -21,6 +21,8 @@ import com.echocare.app.service.UDPListenerService
 import com.echocare.app.util.AppConstants
 import com.echocare.app.util.IntentActions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 
 /**
  * Main Activity - Entry point of the EchoCare app.
@@ -51,6 +53,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var startButton: Button
     private lateinit var stopButton: Button
     private lateinit var btnGetStarted: Button
+    private lateinit var iconSoundwave: ImageView
+    private lateinit var taglineTextView: TextView
+    private lateinit var titleTextView: TextView
 
     // =========================================================================
     // Main App UI Elements
@@ -97,6 +102,9 @@ class MainActivity : AppCompatActivity() {
         // Initialize all UI elements
         initializeViews()
 
+        // Add landing page animations
+        animateLandingPage()
+
         // Set up landing page controls (service start/stop)
         setupButtonListeners()
 
@@ -127,11 +135,35 @@ class MainActivity : AppCompatActivity() {
         startButton = findViewById(R.id.startButton)
         stopButton = findViewById(R.id.stopButton)
         btnGetStarted = findViewById(R.id.btnGetStarted)
+        iconSoundwave = findViewById(R.id.iconSoundwave)
+        taglineTextView = findViewById(R.id.taglineTextView)
+        titleTextView = findViewById(R.id.titleTextView)
 
         // Main app views
         layoutMainApp = findViewById(R.id.layoutMainApp)
         bottomNavigation = findViewById(R.id.bottomNavigation)
 
+    }
+
+    private fun animateLandingPage() {
+        // Icon: fade in + scale up
+        val iconAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in_scale)
+        iconSoundwave.startAnimation(iconAnim)
+
+        // Title: fade in + slide up (starts 300ms after icon)
+        val titleAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in_slide_up)
+        titleTextView.startAnimation(titleAnim)
+
+        // Tagline: fade in + slide up (starts 600ms after icon)
+        val taglineAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in_slide_up)
+        taglineAnim.startOffset = 300
+        taglineTextView.startAnimation(taglineAnim)
+
+        // Sound wave icon: subtle continuous pulse
+        iconSoundwave.postDelayed({
+            val pulseAnim = AnimationUtils.loadAnimation(this, R.anim.pulse)
+            iconSoundwave.startAnimation(pulseAnim)
+        }, 1200) // Start pulsing after initial animation completes
     }
 
     // =========================================================================
