@@ -101,33 +101,51 @@ class NotificationHelper(private val context: Context) {
             notificationBuilder.build()
         )
 
-        // Trigger vibration if enabled
+        // Trigger cry-type-specific vibration if enabled
         if (vibrationEnabled) {
-            triggerVibration()
+            triggerVibration(notification.cryType)
         }
 
         android.util.Log.d("NotificationHelper", "Notification sent: $title")
     }
 
     /**
-     * Trigger haptic feedback vibration
+     * Trigger cry-type-specific haptic feedback vibration.
+     *
+     * Each cry type has a distinct vibration pattern so deaf/HoH parents
+     * can identify the cry type through touch alone:
+     *   - Hungry: Short rapid pulses (rhythmic, like the feeding cry pattern)
+     *   - Pain: Long sustained vibration (urgent, attention-grabbing)
+     *   - Normal: Regular medium pulses (gentle, informational)
+     *
+     * @param cryType The detected cry type ("Hungry", "Pain", or "Normal")
      */
-    private fun triggerVibration() {
+    private fun triggerVibration(cryType: String) {
         try {
+            // Select vibration pattern based on cry type
+            val pattern = when (cryType.lowercase()) {
+                "hungry" -> AppConstants.VIBRATION_PATTERN_HUNGRY
+                "pain" -> AppConstants.VIBRATION_PATTERN_PAIN
+                else -> AppConstants.VIBRATION_PATTERN_NORMAL
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // Modern vibration API
+                // Modern vibration API (Android 8.0+)
                 val vibrationEffect = VibrationEffect.createWaveform(
-                    AppConstants.VIBRATION_PATTERN,
+                    pattern,
                     -1 // Don't repeat
                 )
                 vibrator.vibrate(vibrationEffect)
             } else {
                 // Legacy vibration API
                 @Suppress("DEPRECATION")
-                vibrator.vibrate(AppConstants.VIBRATION_PATTERN, -1)
+                vibrator.vibrate(pattern, -1)
             }
+
+            android.util.Log.d("NotificationHelper", "Vibration: $cryType pattern")
+
         } catch (e: Exception) {
-            // Vibration failed, but don't crash the app
+            // Vibration failed but don't crash the app
             android.util.Log.e("NotificationHelper", "Vibration failed: ${e.message}")
         }
     }

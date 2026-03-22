@@ -37,15 +37,23 @@ object AppConstants {
     const val SERVICE_NOTIFICATION_ID = 1
     const val CRY_NOTIFICATION_ID = 2
 
-    // Vibration Pattern (milliseconds)
-    val VIBRATION_PATTERN = longArrayOf(
-        0,      // Delay before starting
-        500,    // Vibrate for 500ms
-        200,    // Pause for 200ms
-        500,    // Vibrate for 500ms
-        200,    // Pause
-        500     // Final vibration
-    )
+    // =========================================================================
+    // Vibration Patterns (milliseconds)
+    // Format: [delay, vibrate, pause, vibrate, pause, ...]
+    // Tailored for deaf/HoH parents to distinguish cry types by touch
+    // =========================================================================
+
+    /** Hungry: Short rapid pulses - rhythmic, mirrors the cry-pause-cry feeding pattern */
+    val VIBRATION_PATTERN_HUNGRY = longArrayOf(0, 200, 100, 200, 100, 200, 100, 200)
+
+    /** Pain: Long sustained vibration - urgent, demands immediate attention */
+    val VIBRATION_PATTERN_PAIN = longArrayOf(0, 1000, 200, 1000)
+
+    /** Normal: Regular medium pulses - gentle, informational */
+    val VIBRATION_PATTERN_NORMAL = longArrayOf(0, 400, 200, 400, 200, 400)
+
+    /** Default fallback pattern */
+    val VIBRATION_PATTERN = VIBRATION_PATTERN_NORMAL
 
     // SharedPreferences Keys
     const val PREF_NAME = "echocare_preferences"

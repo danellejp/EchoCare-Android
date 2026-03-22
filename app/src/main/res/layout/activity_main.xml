@@ -54,7 +54,6 @@
 
     <!-- ================================================================== -->
     <!-- LANDING PAGE (VISIBLE initially)                                   -->
-    <!-- Only addition: btnGetStarted button at the bottom                  -->
     <!-- ================================================================== -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutLanding"
@@ -69,7 +68,7 @@
             android:id="@+id/iconSoundwave"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_soundwave"
+            android:src="@drawable/logo"
             android:contentDescription="EchoCare sound wave icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
