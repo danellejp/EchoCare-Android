@@ -106,6 +106,9 @@ class NotificationHelper(private val context: Context) {
             triggerVibration(notification.cryType)
         }
 
+        // Flash the torch
+        triggerFlash()
+
         android.util.Log.d("NotificationHelper", "Notification sent: $title")
     }
 
@@ -147,6 +150,25 @@ class NotificationHelper(private val context: Context) {
         } catch (e: Exception) {
             // Vibration failed but don't crash the app
             android.util.Log.e("NotificationHelper", "Vibration failed: ${e.message}")
+        }
+    }
+
+    private fun triggerFlash() {
+        try {
+            val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as android.hardware.camera2.CameraManager
+            val cameraId = cameraManager.cameraIdList[0]
+
+            // Flash 3 times
+            Thread {
+                repeat(3) {
+                    cameraManager.setTorchMode(cameraId, true)
+                    Thread.sleep(300)
+                    cameraManager.setTorchMode(cameraId, false)
+                    Thread.sleep(200)
+                }
+            }.start()
+        } catch (e: Exception) {
+            android.util.Log.e("NotificationHelper", "Flash failed: ${e.message}")
         }
     }
 
