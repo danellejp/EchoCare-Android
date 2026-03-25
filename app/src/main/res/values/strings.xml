@@ -172,4 +172,23 @@
     <!-- Report Download -->
     <string name="download_report">Download Report</string>
     <string name="report_empty">No cry data to download. Detect some cries first!</string>
+
+    <!-- Sounds Page -->
+    <string name="sounds_title">The Snooze Station</string>
+    <string name="sounds_subtitle">Soothing Audio to Help Your Baby Sleep</string>
+
+    <string name="white_noise_title">☁️ White Noise</string>
+    <string name="white_noise_description">White noise contains all frequencies at equal intensity, creating a consistent "shh" sound. It masks sudden background noises like doors closing or dogs barking that might wake your baby. Studies show white noise can help infants fall asleep faster and stay asleep longer by mimicking the constant whooshing sounds heard in the womb.</string>
+
+    <string name="brown_noise_title">🌊 Brown Noise</string>
+    <string name="brown_noise_description">Brown noise emphasises lower frequencies, producing a deep, rumbling sound similar to a strong waterfall or distant thunder. It is generally considered softer and more soothing than white noise. Many parents find brown noise more effective for settling fussy babies as its lower frequencies can feel more calming and comforting for children who are sensitive to high-pitched sounds.</string>
+
+    <string name="pink_noise_title">🌸 Pink Noise</string>
+    <string name="pink_noise_description">Pink noise balances higher and lower frequencies, creating a sound similar to steady rainfall or rustling leaves. It is often considered the most natural-sounding noise type as it is a balance between white and brown noise. Research suggests pink noise can improve deep sleep quality by synchronising brain waves, making it an excellent choice for helping babies and parents sleep more soundly.</string>
+
+    <string name="sounds_note">Playing calming sounds from your phone will not interfere with EchoCare\'s cry detection - the Raspberry Pi listens independently through its own microphone.</string>
+    <string name="sounds_playing">Now Playing</string>
+    <string name="sounds_play">Play</string>
+    <string name="sounds_stop">Stop</string>
+    <string name="nav_sounds">Sounds</string>
 </resources>

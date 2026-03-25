@@ -37,4 +37,9 @@
         android:label="@string/nav_environment"
         tools:layout="@layout/fragment_environment" />
 
+    <fragment
+        android:id="@+id/soundsFragment"
+        android:name="com.echocare.app.ui.sounds.SoundsFragment"
+        android:label="Sounds"
+        tools:layout="@layout/fragment_sounds" />
 </navigation>

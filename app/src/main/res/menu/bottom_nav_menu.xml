@@ -30,4 +30,8 @@
         android:icon="@drawable/ic_environment"
         android:title="@string/nav_environment" />
 
+    <item
+        android:id="@+id/soundsFragment"
+        android:icon="@drawable/ic_sounds"
+        android:title="@string/nav_sounds" />
 </menu>
