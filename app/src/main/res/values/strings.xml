@@ -174,7 +174,7 @@
     <string name="report_empty">No cry data to download. Detect some cries first!</string>
 
     <!-- Sounds Page -->
-    <string name="sounds_title">The Snooze Station</string>
+    <string name="sounds_title">💤 The Snooze Station 💤</string>
     <string name="sounds_subtitle">Soothing Audio to Help Your Baby Sleep</string>
 
     <string name="white_noise_title">☁️ White Noise</string>
